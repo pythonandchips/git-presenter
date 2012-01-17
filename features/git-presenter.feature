@@ -1,9 +1,12 @@
-Feature: something something
-  In order to something something
-  A user something something
-  something something something
+Feature: Use GIT presenter to move forward through commits while presenting code at a conference
 
-  Scenario: something something
-    Given inspiration
-    When I create a sweet new gem
-    Then everyone should see how awesome I am
+  Scenario: Initialise folder for presentation
+    Given I have written the code for a presentation
+    When I initialise the presentation
+    And reset the folder to starting possition
+    Then I should be on the first commit
+
+  Scenario: Move forward in commits
+    Given I have setup the code for presentation
+    Then I start the presentation
+    And I move to the next commit
