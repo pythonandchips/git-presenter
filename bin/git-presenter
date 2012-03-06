@@ -1,0 +1,8 @@
+#!/usr/bin/ruby
+
+require "rubygems"
+require "../lib/git_presenter"
+
+
+GitPresenter.initialise_presentation(Dir.pwd)
+GitPresenter.start_presentation
