@@ -16,6 +16,11 @@ def initialise_test_repo(presentation_dir)
     end
     git_repo.commit_all("second commit")
     commits << git_repo.commits[1]
+    File.open(code_file, "a") do |file|
+      file.write("c")
+    end
+    git_repo.commit_all("third commit")
+    commits << git_repo.commits[2]
   end
   commits
 end
@@ -30,4 +35,26 @@ end
 
 def clean_up_repo(dir)
   `rm -fr #{dir}`
+end
+
+def head_position
+  File.open(presentation_dir + '/.git/HEAD').lines.first.strip
+end
+
+def initialise_presentation
+  commits = initialise_test_repo(presentation_dir)
+  Dir.chdir(presentation_dir) do
+    git_presentation = GitPresenter.initialise_presentation(".")
+    file = File.open(File.join(presentation_dir, ".presentation"))
+    yield(commits, file) if block_given?
+  end
+  commits
+end
+
+def start_presentation
+  commits = initialise_presentation
+  Dir.chdir(presentation_dir) do
+    presenter = GitPresenter.start_presentation(".")
+    yield(commits, presenter) if block_given?
+  end
 end
