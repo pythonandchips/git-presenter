@@ -3,10 +3,9 @@
 require "rubygems"
 require_relative "../lib/git_presenter"
 
-
 GitPresenter.initialise_presentation(Dir.pwd)
 presenter = GitPresenter.start_presentation(Dir.pwd)
 
-while command = Readline.readline('> ', true)
-  presenter.execute(command)
+while command = Readline.readline(presenter.status_line, true)
+  p presenter.execute(command)
 end
