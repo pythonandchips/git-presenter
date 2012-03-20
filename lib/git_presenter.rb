@@ -42,6 +42,10 @@ class GitPresenter
 
   def execute(user_command)
     command = command_for(user_command)
+    if command.nil?
+      puts "I canny understand ye, gonna try again"
+      return
+    end
     return commit(user_command.to_i) if command == :commit
     self.send(command)
   end
