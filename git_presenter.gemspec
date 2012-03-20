@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Colin Gemmell"]
-  s.date = "2012-03-06"
-  s.description = "Presentation tool that use git to move throught code samples"
+  s.date = "2012-03-20"
+  s.description = "A simpler way of presenting progression of code using git as a presenter"
   s.email = "pythonandchips@gmail.com"
   s.executables = ["git-presenter"]
   s.extra_rdoc_files = [
@@ -26,8 +26,13 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "bin/git-presenter",
+    "git_presenter.gemspec",
     "lib/git_presenter.rb",
-    "spec/integration/git_presenter_spec.rb",
+    "spec/integration/initialize_presentation_spec.rb",
+    "spec/integration/moving_through_presentation_spec.rb",
+    "spec/integration/processing_user_command_spec.rb",
+    "spec/integration/start_presentation_spec.rb",
+    "spec/integration/status_line_spec.rb",
     "spec/spec_helper.rb",
     "spec/support/repo_helpers.rb"
   ]
@@ -35,7 +40,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.15"
-  s.summary = "Code presentation tool using GIT"
+  s.summary = "Code presentation tool using git"
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
