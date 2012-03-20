@@ -3,9 +3,16 @@
 require "rubygems"
 require_relative "../lib/git_presenter"
 
-GitPresenter.initialise_presentation(Dir.pwd)
-presenter = GitPresenter.start_presentation(Dir.pwd)
+if ARGV[0] == "init"
+  GitPresenter.initialise_presentation(Dir.pwd)
+  puts "Presentation has been initalised"
+  puts "run 'git-presenter start' to begin the presentation"
+elsif ARGV[0] == "start"
+  presenter = GitPresenter.start_presentation(Dir.pwd)
 
-while command = Readline.readline(presenter.status_line, true)
-  p presenter.execute(command)
+  while command = Readline.readline(presenter.status_line, true)
+    p presenter.execute(command)
+  end
+else
+  puts "what you talkin bout willis"
 end
