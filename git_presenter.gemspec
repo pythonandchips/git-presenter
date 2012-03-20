@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Colin Gemmell"]
   s.date = "2012-03-20"
-  s.description = "A simpler way of presenting progression of code using git as a presenter"
+  s.description = "Code presentation tool using git"
   s.email = "pythonandchips@gmail.com"
   s.executables = ["git-presenter"]
   s.extra_rdoc_files = [
