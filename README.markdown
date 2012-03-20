@@ -8,7 +8,8 @@ Git-presenter hope to solve this problem by giving a presentation style interfac
 
 ## Current status
 
-In Development
+Early version but the basics are there to be used.
+Any and all feedback is welcome
 
 ## Pre-requisites
 
@@ -22,10 +23,16 @@ gem install git-presenter
 ## Usage
 
 Commit to git as you develop you code.
-When the code is ready use the gpresenter init command to initialise
-Use gpres start to revert to the first commit
-Use gpres next to move forward throught the commits
-Use gpres prev to move to the previous commit
+When the code is ready use the "git-presenter init" command to initialise
+Once it is initialised you can start the presentation with "git-presenter start"
+Then use the following command to navigate the presentation
+
+next/n: move to next slide
+back/b: move back a slide
+end/e:  move to end of presentation
+start/s: move to start of presentation
+list/l : list slides in presentation
+help/h: display this message
 
 ## Contributing to git-presenter
 
