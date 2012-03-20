@@ -17,13 +17,13 @@ describe "initializing a presentation" do
     end
 
     it "first line should contain the first commit number" do
-      initialise_presentation do |commits, file|
+      initialise_presentation(true) do |commits, file|
         file.lines.first.should include commits.first.id
       end
     end
 
     it "second line should contain the second commit number" do
-      initialise_presentation do |commits, file|
+      initialise_presentation(true) do |commits, file|
         file.lines.to_a[1].should include commits[1].id
       end
     end

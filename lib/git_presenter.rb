@@ -9,7 +9,7 @@ class GitPresenter
   def self.initialise_presentation dir
     File.open(dir + "/.presentation", "w") do |file|
       repo = Grit::Repo.new(".", "master")
-      repo.commits.each do |commit|
+      repo.commits.reverse.each do |commit|
         file.write("#{commit.id}\n")
       end
     end
