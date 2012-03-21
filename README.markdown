@@ -23,17 +23,16 @@ gem install git_presenter
 
 ## Usage
 
-Commit to git as you develop you code.
-When the code is ready use the "git-presenter init" command to initialise
-Once it is initialised you can start the presentation with "git-presenter start"
-Then use the following command to navigate the presentation
-
-next/n: move to next slide
-back/b: move back a slide
-end/e:  move to end of presentation
-start/s: move to start of presentation
-list/l : list slides in presentation
-help/h: display this message
+* Commit to git as you develop you code.
+* When the code is ready use the "git-presenter init" command to initialise
+* Once it is initialised you can start the presentation with "git-presenter start"
+* Then use the following command to navigate the presentation
+* next/n: move to next slide
+* back/b: move back a slide
+* end/e:  move to end of presentation
+* start/s: move to start of presentation
+* list/l : list slides in presentation
+* help/h: display this message
 
 ## Contributing to git-presenter
 
