@@ -36,7 +36,8 @@ class GitPresenter
      "start" => :start, "s" => :start,
      "end" => :end, "e" => :end,
      "list" => :list, "l" => :list,
-     "help" => :help, "h" => :help
+     "help" => :help, "h" => :help,
+     "exit" => :exit
     }[command]
   end
 
@@ -47,6 +48,7 @@ class GitPresenter
       return
     end
     return commit(user_command.to_i) if command == :commit
+    return :exit if command == :exit
     self.send(command)
   end
 

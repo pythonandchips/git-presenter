@@ -12,7 +12,9 @@ elsif ARGV[0] == "start"
   presenter = GitPresenter.start_presentation(Dir.pwd)
 
   while command = Readline.readline(presenter.status_line, true)
-    p presenter.execute(command)
+    result = presenter.execute(command)
+    exit if result == :exit
+    puts result
   end
 else
   puts "what you talkin bout willis"
