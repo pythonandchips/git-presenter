@@ -1,6 +1,7 @@
 # git-presenter
 
 When presenting code live on stage you have a few choices:
+
 * Change code live on stage and risk making a mistake and the code not working.
 * Place code in a slide and not be able to run the code live.
 
@@ -18,7 +19,7 @@ Any and all feedback is welcome
 
 ## Installation
 
-gem install git-presenter
+gem install git_presenter
 
 ## Usage
 
