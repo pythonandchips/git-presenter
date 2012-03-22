@@ -1,5 +1,7 @@
 # git-presenter
 
+[![Build Status](https://secure.travis-ci.org/pythonandchips/git-presenter.png?branch=master)](http://travis-ci.org/pythonandchips/git-presenter)
+
 When presenting code live on stage you have a few choices:
 
 * Change code live on stage and risk making a mistake and the code not working.
