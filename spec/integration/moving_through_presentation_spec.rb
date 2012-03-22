@@ -25,7 +25,14 @@ describe "while giving presentation" do
   end
 
   context "when a change has been made during a slide" do
-
+    it "should continue till the last commit" do
+      @helper.start_presentation do |commits, presenter|
+        presenter.execute("next")
+        @helper.edit_file("inner commit")
+        presenter.execute("next")
+        @helper.head_position.should eql commits[2].id
+      end
+    end
   end
 
   context "when the presentation reaches the end" do

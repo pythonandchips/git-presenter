@@ -6,32 +6,36 @@ class GitHelper
 
   def initialise_test_repo(presentation_dir, delay)
     clean_up_repo(presentation_dir)
-    code_file = "a_file.rb"
+    @code_file = "a_file.rb"
     commits = []
     Dir.mkdir(presentation_dir)
     Dir.chdir(presentation_dir) do
-      git_repo = Grit::Repo.init(".")
-      edit_file(git_repo, code_file, "initial commit", "a")
-      commits << git_repo.commits[0]
+      @git_repo = Grit::Repo.init(".")
+      edit_file_and_commit("initial commit", "a")
+      commits << @git_repo.commits[0]
       #need to make it sleep for a second.
       #git is not accurate enough with the speed of the test
       #to sort correctly
       sleep 1 if delay
-      edit_file(git_repo, code_file, "second commit", "b")
-      commits << git_repo.commits[0]
+      edit_file_and_commit("second commit", "b")
+      commits << @git_repo.commits[0]
       sleep 1 if delay
-      edit_file(git_repo, code_file, "third commit", "c")
-      commits << git_repo.commits[0]
+      edit_file_and_commit("third commit", "c")
+      commits << @git_repo.commits[0]
     end
     commits
   end
 
-  def edit_file(git_repo, code_file, commit_message, content)
-    File.open(code_file, "a") do |file|
+  def edit_file(content)
+    File.open(@code_file, "a") do |file|
       file.write(content)
     end
-    git_repo.add(".")
-    git_repo.commit_all(commit_message)
+  end
+
+  def edit_file_and_commit(commit_message, content)
+    edit_file(content)
+    @git_repo.add(".")
+    @git_repo.commit_all(commit_message)
   end
 
   def setup_presentation_file(commits)
