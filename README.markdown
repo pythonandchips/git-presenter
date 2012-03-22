@@ -17,7 +17,7 @@ Any and all feedback is welcome
 ## Pre-requisites
 
 * Git
-* Ruby
+* Ruby version 1.9.2 or 1.9.3 or jruby in 1.9 mode (basically anything with 1.9 at the end)
 
 ## Installation
 
