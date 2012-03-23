@@ -25,7 +25,7 @@ gem install git_presenter
 
 ## Usage
 
-* Commit to git as you develop you code.
+* Commit to git as you develop your code.
 * When the code is ready use the "git-presenter init" command to initialise
 * Once it is initialised you can start the presentation with "git-presenter start"
 * Then use the following command to navigate the presentation
