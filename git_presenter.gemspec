@@ -29,12 +29,16 @@ Gem::Specification.new do |s|
     "bin/git-presenter",
     "git_presenter.gemspec",
     "lib/git_presenter.rb",
+    "lib/git_presenter/parser.rb",
     "lib/git_presenter/presentation.rb",
     "lib/git_presenter/slide.rb",
+    "lib/git_presenter/writer.rb",
     "spec/integration/initialize_presentation_spec.rb",
     "spec/integration/moving_through_presentation_spec.rb",
     "spec/integration/start_presentation_spec.rb",
     "spec/lib/git_presenter/presentation_spec.rb",
+    "spec/lib/git_presenter/slide_spec.rb",
+    "spec/lib/git_presenter/writer_spec.rb",
     "spec/spec_helper.rb",
     "spec/support/repo_helpers.rb"
   ]

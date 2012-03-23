@@ -10,6 +10,7 @@ if ARGV[0] == "init"
   puts "run 'git-presenter start' to begin the presentation"
 elsif ARGV[0] == "start"
   presenter = GitPresenter.start_presentation(Dir.pwd)
+  puts presenter.current_slide
 
   while command = Readline.readline(presenter.status_line, true)
     result = presenter.execute(command)

@@ -1,6 +1,6 @@
 module GitPresenter
   class Presentation
-    attr_reader :slides
+    attr_reader :slides, :current_slide
 
     def initialize(presentation)
       @slides = presentation["slides"].map{|slide| Slide.new(slide)}
@@ -80,7 +80,7 @@ help/h: display this message
     end
 
     def previous
-      return if position == 0
+      return @current_slide if position == 0
       @current_slide = slides[position - 1]
       checkout_current
       @current_slide
