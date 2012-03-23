@@ -28,6 +28,10 @@ describe GitPresenter::Presentation do
       presenter.command_for(command)
     end
 
+    context "with bash command" do
+      it { given_command("!echo hello world").should eql :command }
+    end
+
     context "with next" do
       it { given_command("next").should eql :next }
     end

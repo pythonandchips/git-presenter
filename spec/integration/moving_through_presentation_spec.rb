@@ -129,4 +129,15 @@ EOH
       end
     end
   end
+
+  context "when executing a command" do
+    it "should run the command in the shell" do
+      command_output = StringIO.new
+      $stdout = command_output
+      @helper.start_presentation do |commits, presenter|
+        presenter.execute("!echo hello world")
+        command_output.string.strip.should eql "hello world"
+      end
+    end
+  end
 end

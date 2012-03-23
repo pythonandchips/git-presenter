@@ -9,6 +9,7 @@ module GitPresenter
 
     def command_for(command)
       return :commit if command =~ /^[0-9]+$/
+      return :command if command[0] == "!"
       {"n" => :next, "next" => :next,
        "back" => :previous, "b" => :previous,
        "start" => :start, "s" => :start,
@@ -26,8 +27,13 @@ module GitPresenter
         return
       end
       return commit(user_command.to_i) if command == :commit
+      return bash_command(user_command) if command == :command
       return :exit if command == :exit
       self.send(command)
+    end
+
+    def bash_command(user_command)
+      puts `#{user_command[1..-1]}`
     end
 
     def status_line
@@ -70,6 +76,7 @@ help/h: display this message
     def commit(slide_number)
       @current_slide = slides[slide_number - 1]
       checkout_current
+      @current_slide
     end
 
     def next
