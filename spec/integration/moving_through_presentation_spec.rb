@@ -123,6 +123,8 @@ end/e:  move to end of presentation
 start/s: move to start of presentation
 list/l : list slides in presentation
 help/h: display this message
+!(exclimation mark): execute following in terminal
+exit: exit from the presentation
 EOH
         message = presenter.execute("help")
         message.should eql help_text

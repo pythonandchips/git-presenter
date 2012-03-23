@@ -64,7 +64,9 @@ end/e:  move to end of presentation
 start/s: move to start of presentation
 list/l : list slides in presentation
 help/h: display this message
-      EOH
+!(exclimation mark): execute following in terminal
+exit: exit from the presentation
+EOH
     end
 
     def end
