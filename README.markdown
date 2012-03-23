@@ -1,5 +1,7 @@
 # git-presenter
 
+[![Build Status](https://secure.travis-ci.org/pythonandchips/git-presenter.png?branch=master)](http://travis-ci.org/pythonandchips/git-presenter)
+
 When presenting code live on stage you have a few choices:
 
 * Change code live on stage and risk making a mistake and the code not working.
@@ -15,7 +17,7 @@ Any and all feedback is welcome
 ## Pre-requisites
 
 * Git
-* Ruby
+* Ruby version 1.9.2 or 1.9.3 or jruby in 1.9 mode (basically anything with 1.9 at the end)
 
 ## Installation
 
@@ -23,7 +25,7 @@ gem install git_presenter
 
 ## Usage
 
-* Commit to git as you develop you code.
+* Commit to git as you develop your code.
 * When the code is ready use the "git-presenter init" command to initialise
 * Once it is initialised you can start the presentation with "git-presenter start"
 * Then use the following command to navigate the presentation
