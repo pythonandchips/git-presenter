@@ -85,9 +85,9 @@ help/h: display this message
     def list
       @slides.map do |slide|
         if slide == @current_slide
-          "*#{slide.commit}"
+          "*#{slide}"
         else
-          slide.commit
+          slide
         end
       end.join("\n")
     end
