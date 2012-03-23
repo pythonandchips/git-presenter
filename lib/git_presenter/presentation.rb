@@ -45,6 +45,7 @@ module GitPresenter
     def start
       @current_slide = slides.first
       checkout_current
+      @current_slide
     end
 
     def help
@@ -63,6 +64,7 @@ help/h: display this message
     def end
       @current_slide = slides.last
       checkout_current
+      @current_slide
     end
 
     def commit(slide_number)
@@ -74,12 +76,14 @@ help/h: display this message
       return if position.nil?
       @current_slide = slides[position + 1] || @current_slide
       checkout_current
+      @current_slide
     end
 
     def previous
       return if position == 0
       @current_slide = slides[position - 1]
       checkout_current
+      @current_slide
     end
 
     def list
