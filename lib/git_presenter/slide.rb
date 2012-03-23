@@ -8,7 +8,7 @@ module GitPresenter
     end
 
     def to_s
-      "#{@commit}, #{@message}"
+      "#{@commit[0..9]}, #{@message}"
     end
 
   end

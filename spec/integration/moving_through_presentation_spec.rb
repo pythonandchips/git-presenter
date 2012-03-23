@@ -104,7 +104,7 @@ describe "while giving presentation" do
   context "list presentation" do
     it "should print a list of commits" do
       @helper.start_presentation do |commits, presenter|
-        expected_output = (["*#{commits.first.id}, #{commits.first.message}"] + commits[1..-1].map{|commit| "#{commit.id}, #{commit.message}"}).join("\n")
+        expected_output = (["*#{commits.first.id[0..9]}, #{commits.first.message}"] + commits[1..-1].map{|commit| "#{commit.id[0..9]}, #{commit.message}"}).join("\n")
         presentation = presenter.execute("list")
         presentation.should eql expected_output
       end
