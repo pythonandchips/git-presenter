@@ -48,12 +48,26 @@ describe "while giving presentation" do
   end
 
   context "when going back through the presentation" do
-    it "should o go back to a previous commit" do
+    it "should go back to a previous commit" do
       @helper.start_presentation do |commits, presenter|
         presenter.execute("next")
         presenter.execute("next")
         presenter.execute("back")
         @helper.head_position.should eql commits[1].id
+      end
+    end
+  end
+
+  context "when going back through the presentation and it reaches the begining" do
+    it "should stay on the last commit" do
+      @helper.start_presentation do |commits, presenter|
+        presenter.execute("next")
+        presenter.execute("next")
+        presenter.execute("back")
+        presenter.execute("back")
+        presenter.execute("back")
+        presenter.execute("back")
+        @helper.head_position.should eql commits[0].id
       end
     end
   end

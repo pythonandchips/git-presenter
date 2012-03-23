@@ -5,6 +5,7 @@ module GitPresenter
   require "git_presenter/presentation"
   require "git_presenter/writer"
   require "git_presenter/parser"
+  require "git_presenter/slide"
 
   def self.initialise_presentation dir
     builder = Writer.new(dir)

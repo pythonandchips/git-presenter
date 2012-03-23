@@ -1,8 +1,9 @@
 module GitPresenter
   class Slide
+    attr_reader :commit
 
-    def initalize(commit)
-      @commit = commit
+    def initialize(slide)
+      @commit = slide["commit"]
     end
 
   end

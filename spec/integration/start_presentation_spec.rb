@@ -11,19 +11,19 @@ describe "starting a presentation" do
     @helper.initialise_presentation
     Dir.chdir(presentation_dir) do
       presenter = GitPresenter.start_presentation(".")
-      presenter.commits.length.should eql 3
+      presenter.slides.length.should eql 3
     end
   end
 
   it "first commit should be first commit in file" do
     @helper.start_presentation do |commits, presenter|
-      presenter.commits[0].should eql commits[0].id
+      presenter.slides[0].commit.should eql commits[0].id
     end
   end
 
   it "second commit should be second commit in file" do
     @helper.start_presentation do |commits, presenter|
-      presenter.commits[1].should eql commits[1].id
+      presenter.slides[1].commit.should eql commits[1].id
     end
   end
 

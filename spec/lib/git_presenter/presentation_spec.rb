@@ -1,15 +1,30 @@
 require "spec_helper"
 
 describe GitPresenter::Presentation do
+  let(:presentation){ {"slides" => [
+                          {"commit" => "0"},
+                          {"commit" => "1"},
+                          {"commit" => "2"}]
+                      }
+                    }
   context "when displaying the command line" do
     it "should display the current position" do
-      presenter = GitPresenter::Presentation.new(["0", "1","2"])
+      presenter = GitPresenter::Presentation.new(presentation)
       presenter.status_line.should eql "1/3 >"
     end
   end
+
+
+  context "when calculating the position" do
+    it "should return the index of the current commit" do
+      presenter = GitPresenter::Presentation.new(presentation)
+      presenter.position.should eql 0
+    end
+  end
+
   context "when processing a user command" do
     def given_command(command)
-      presenter = GitPresenter::Presentation.new([])
+      presenter = GitPresenter::Presentation.new(presentation)
       presenter.command_for(command)
     end
 

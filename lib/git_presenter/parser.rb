@@ -7,8 +7,7 @@ module GitPresenter
     def presentation
       presenter = nil
       yaml = YAML.parse(File.open(@presentation_dir + "/.presentation", "r")).to_ruby
-      commits = yaml["slides"].map{|slide| slide["commit"]}
-      presenter = GitPresenter::Presentation.new(commits)
+      presenter = GitPresenter::Presentation.new(yaml)
       presenter.start
       presenter
     end

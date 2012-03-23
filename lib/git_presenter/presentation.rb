@@ -1,12 +1,10 @@
 module GitPresenter
   class Presentation
-    def initialize(commits)
-      @commits = commits
-      @current_commit = commits.first
-    end
+    attr_reader :slides
 
-    def commits
-      @commits
+    def initialize(presentation)
+      @slides = presentation["slides"].map{|slide| Slide.new(slide)}
+      @current_slide = slides.first
     end
 
     def command_for(command)
@@ -37,15 +35,15 @@ module GitPresenter
     end
 
     def position
-      commits.index(@current_commit)
+      slides.index(@current_slide)
     end
 
     def total_slides
-      @commits.length
+      @slides.length
     end
 
     def start
-      @current_commit = commits.first
+      @current_slide = slides.first
       checkout_current
     end
 
@@ -63,37 +61,40 @@ help/h: display this message
     end
 
     def end
-      @current_commit = commits.last
+      @current_slide = slides.last
       checkout_current
     end
 
     def commit(slide_number)
-      @current_commit = commits[slide_number - 1]
+      @current_slide = slides[slide_number - 1]
       checkout_current
     end
 
     def next
       return if position.nil?
-      @current_commit = commits[position + 1]
+      @current_slide = slides[position + 1] || @current_slide
       checkout_current
     end
 
     def previous
-      position = commits.index(@current_commit)
-      @current_commit = commits[position - 1]
+      return if position == 0
+      @current_slide = slides[position - 1]
       checkout_current
     end
 
     def list
-      commits = @commits.dup
-      position = commits.index(@current_commit)
-      commits[position] = "*#{commits[position]}"
-      commits.join("\n")
+      @slides.map do |slide|
+        if slide == @current_slide
+          "*#{slide.commit}"
+        else
+          slide.commit
+        end
+      end.join("\n")
     end
 
     def checkout_current
       `git checkout -q . `
-      `git checkout -q #{@current_commit}`
+      `git checkout -q #{@current_slide.commit}`
     end
   end
 end
