@@ -1,24 +1,18 @@
 require "grit"
+require "yaml"
 
 module GitPresenter
   require "git_presenter/presentation"
+  require "git_presenter/writer"
+  require "git_presenter/parser"
 
   def self.initialise_presentation dir
-    File.open(dir + "/.presentation", "w") do |file|
-      repo = Grit::Repo.new(".", "master")
-      repo.commits.reverse.each do |commit|
-        file.write("#{commit.id}\n")
-      end
-    end
+    builder = Writer.new(dir)
+    builder.output_presenatation_file
   end
 
   def self.start_presentation dir
-    presenter = nil
-    File.open(dir + "/.presentation", "r") do |file|
-      commits = file.lines.map{|line| line.strip}
-      presenter = GitPresenter::Presentation.new(commits)
-      presenter.start
-    end
-    presenter
+    parser = Parser.new(dir)
+    parser.presentation
   end
 end

@@ -1,4 +1,9 @@
 class GitHelper
+  PRESENTATION_DIR = File.expand_path(File.dirname(__FILE__) + '/../../presentation')
+
+  def self.presentation_dir
+    PRESENTATION_DIR
+  end
 
   def initialize(presentation_dir)
     @presentation_dir = presentation_dir
@@ -58,8 +63,8 @@ class GitHelper
     commits = initialise_test_repo(@presentation_dir, delay)
     Dir.chdir(@presentation_dir) do
       git_presentation = GitPresenter.initialise_presentation(".")
-      file = File.open(File.join(@presentation_dir, ".presentation"))
-      yield(commits, file) if block_given?
+      yaml = YAML::parse(File.open(File.join(@presentation_dir, ".presentation"))).to_ruby
+      yield(commits, yaml) if block_given?
     end
     commits
   end

@@ -1,7 +1,7 @@
 require "spec_helper"
 
 describe "initializing a presentation" do
-  let(:presentation_dir){File.dirname(__FILE__) + "/../../presentation"}
+  let(:presentation_dir){GitHelper.presentation_dir}
 
   before do
     @helper = GitHelper.new(presentation_dir)
@@ -14,21 +14,27 @@ describe "initializing a presentation" do
       end
     end
 
+    it "should have a slides node" do
+      @helper.initialise_presentation do |commits, yaml|
+        yaml["slides"].should_not be_nil
+      end
+    end
+
     it "should contain a line for each commit to the repository" do
-      @helper.initialise_presentation do |commits, file|
-        file.lines.to_a.length.should eql commits.length
+      @helper.initialise_presentation do |commits, yaml|
+        yaml["slides"].length.should eql commits.length
       end
     end
 
     it "first line should contain the first commit number" do
-      @helper.initialise_presentation(true) do |commits, file|
-        file.lines.first.should include commits.first.id
+      @helper.initialise_presentation(true) do |commits, yaml|
+        yaml["slides"][0]["commit"].should eql commits.first.id
       end
     end
 
     it "second line should contain the second commit number" do
-      @helper.initialise_presentation(true) do |commits, file|
-        file.lines.to_a[1].should include commits[1].id
+      @helper.initialise_presentation(true) do |commits, yaml|
+        yaml["slides"][1]["commit"].should eql commits[1].id
       end
     end
   end
