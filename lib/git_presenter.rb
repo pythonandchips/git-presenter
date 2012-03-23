@@ -113,7 +113,7 @@ EOH
   end
 
   def checkout_current
-    `git checkout .`
-    `git checkout #{@current_commit}`
+    `git checkout -q . `
+    `git checkout -q #{@current_commit}`
   end
 end
