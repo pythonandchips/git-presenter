@@ -36,12 +36,6 @@ gem install git_presenter
 * list/l : list slides in presentation
 * help/h: display this message
 
-##Changelog
-
-* 22 March 2012
-  - added exit method
-  - added checkout to make sure presentation can continue if files have been edited
-
 ## Contributing to git-presenter
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
