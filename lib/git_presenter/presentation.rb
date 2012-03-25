@@ -3,7 +3,7 @@ module GitPresenter
     attr_reader :slides, :current_slide
 
     def initialize(presentation)
-      @slides = presentation["slides"].map{|slide| Slide.new(slide)}
+      @slides = presentation["slides"].map{|slide| Slide.new(slide["slide"])}
       @current_slide = slides.first
     end
 
@@ -50,8 +50,7 @@ module GitPresenter
 
     def start
       @current_slide = slides.first
-      checkout_current
-      @current_slide
+      @current_slide.execute
     end
 
     def help
@@ -71,28 +70,24 @@ EOH
 
     def end
       @current_slide = slides.last
-      checkout_current
-      @current_slide
+      @current_slide.execute
     end
 
     def commit(slide_number)
       @current_slide = slides[slide_number - 1]
-      checkout_current
-      @current_slide
+      @current_slide.execute
     end
 
     def next
       return if position.nil?
       @current_slide = slides[position + 1] || @current_slide
-      checkout_current
-      @current_slide
+      @current_slide.execute
     end
 
     def previous
       return @current_slide if position == 0
       @current_slide = slides[position - 1]
-      checkout_current
-      @current_slide
+      @current_slide.execute
     end
 
     def list
@@ -105,9 +100,5 @@ EOH
       end.join("\n")
     end
 
-    def checkout_current
-      `git checkout -q . `
-      `git checkout -q #{@current_slide.commit}`
-    end
   end
 end

@@ -2,9 +2,9 @@ require "spec_helper"
 
 describe GitPresenter::Presentation do
   let(:presentation){ {"slides" => [
-                          {"commit" => "0"},
-                          {"commit" => "1"},
-                          {"commit" => "2"}]
+                          {"slide" => {"commit" => "0"}},
+                          {"slide" => {"commit" => "1"}},
+                          {"slide" => {"commit" => "2"}}]
                       }
                     }
   context "when displaying the command line" do

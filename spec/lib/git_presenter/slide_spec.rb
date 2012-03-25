@@ -7,4 +7,32 @@ describe GitPresenter::Slide do
       slide.to_s.should eql "0123456789, message"
     end
   end
+
+  describe "execute" do
+    context "when slide has only a run command" do
+      it "should run that command" do
+        command_line_helper = CommandLineHelper.capture_output
+        slide = GitPresenter::Slide.new({"run" => "echo hello world"})
+        slide.execute.strip.should eql "hello world"
+      end
+    end
+
+    context "when slide contains both commit and run message" do
+      it "should checkout the code then run the command" do
+        command_line_helper = CommandLineHelper.capture_output
+        slide = GitPresenter::Slide.new({"commit" => "number", "message" => "checkout", "run" => "echo hello world"})
+        slide.stub(:checkout).and_return("checkout\n")
+        slide.execute.should eql "checkout\nhello world\n"
+      end
+    end
+
+    context "when slide contains only a commit" do
+      it "should checkout the code then run the command" do
+        command_line_helper = CommandLineHelper.capture_output
+        slide = GitPresenter::Slide.new({"commit" => "number", "message" => "checkout"})
+        slide.stub(:checkout).and_return("checkout\n")
+        slide.execute.should eql "checkout\n"
+      end
+    end
+  end
 end

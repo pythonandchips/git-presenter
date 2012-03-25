@@ -132,13 +132,33 @@ EOH
     end
   end
 
+  context "when the slide contains a run command only" do
+    it "should execute the command" do
+      command_line_helper = CommandLineHelper.capture_output
+      @helper.start_presentation("echo hello world") do |commits, presenter|
+        presenter.execute("next")
+        presenter.execute("next")
+        presenter.execute("next").strip.should eql "hello world"
+      end
+    end
+  end
+
+  context "when the slide has a commit and a run command" do
+    it "should checkout the commit and then execute the command" do
+      command_line_helper = CommandLineHelper.capture_output
+      @helper.start_presentation("echo hello world", 2) do |commits, presenter|
+        presenter.execute("next")
+        presenter.execute("next").should eql "#{commits[2].message}\nhello world\n"
+      end
+    end
+  end
+
   context "when executing a command" do
     it "should run the command in the shell" do
-      command_output = StringIO.new
-      $stdout = command_output
+      command_line_helper = CommandLineHelper.capture_output
       @helper.start_presentation do |commits, presenter|
         presenter.execute("!echo hello world")
-        command_output.string.strip.should eql "hello world"
+        command_line_helper.command_output.strip.should eql "hello world"
       end
     end
   end

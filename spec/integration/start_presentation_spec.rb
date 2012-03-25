@@ -9,9 +9,10 @@ describe "starting a presentation" do
 
   it "should contian the commits for presentations" do
     @helper.initialise_presentation
+    @helper.add_command("echo hello world")
     Dir.chdir(presentation_dir) do
       presenter = GitPresenter.start_presentation(".")
-      presenter.slides.length.should eql 3
+      presenter.slides.length.should eql 4
     end
   end
 
@@ -24,6 +25,13 @@ describe "starting a presentation" do
   it "second commit should be second commit in file" do
     @helper.start_presentation do |commits, presenter|
       presenter.slides[1].commit.should eql commits[1].id
+    end
+  end
+
+  it "the last commit should be a command" do
+    command = "echo hello world"
+    @helper.start_presentation(command) do |commits, presenter|
+      presenter.slides[3].run.should eql command
     end
   end
 
