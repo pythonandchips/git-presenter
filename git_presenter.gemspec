@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "git_presenter"
-  s.version = "0.1.1"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Colin Gemmell"]
-  s.date = "2012-03-23"
+  s.date = "2012-03-26"
   s.description = "Code presentation tool using git"
   s.email = "pythonandchips@gmail.com"
   s.executables = ["git-presenter"]
@@ -40,7 +40,8 @@ Gem::Specification.new do |s|
     "spec/lib/git_presenter/slide_spec.rb",
     "spec/lib/git_presenter/writer_spec.rb",
     "spec/spec_helper.rb",
-    "spec/support/repo_helpers.rb"
+    "spec/support/command_line_helper.rb",
+    "spec/support/git_helpers.rb"
   ]
   s.homepage = "http://github.com/pythonandchips/git-presenter"
   s.licenses = ["MIT"]
