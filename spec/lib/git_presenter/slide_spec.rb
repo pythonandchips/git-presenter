@@ -6,6 +6,11 @@ describe GitPresenter::Slide do
       slide = GitPresenter::Slide.new({"commit" => "012345678901234567890","message" => "message"})
       slide.to_s.should eql "0123456789, message"
     end
+
+    it "should not blow up if no command exists" do
+      slide = GitPresenter::Slide.new({"run" => "echo hello world"})
+      slide.to_s.should eql "run: echo hello world"
+    end
   end
 
   describe "execute" do

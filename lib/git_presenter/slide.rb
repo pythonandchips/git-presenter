@@ -16,7 +16,8 @@ module GitPresenter
     end
 
     def to_s
-      "#{@commit[0..9]}, #{@message}"
+      return "#{@commit[0..9]}, #{@message}" unless @commit.nil?
+      "run: #{@run}"
     end
 
     private
