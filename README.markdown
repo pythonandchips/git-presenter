@@ -36,6 +36,11 @@ gem install git_presenter
 * list/l : list slides in presentation
 * help/h: display this message
 
+## Bugs/Features/Prase
+
+It you find any bugs or have some feature requests please add an issue on the repository. Or if you just want to get in touch and tell me how awesome git presenter is you can get me on twitter @colin_gemmell or drop me an email at pythonandchips{at}gmail.com
+
+
 ## Contributing to git-presenter
 
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
