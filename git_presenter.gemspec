@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "git_presenter"
-  s.version = "0.2.1"
+  s.version = "0.2.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Colin Gemmell"]
-  s.date = "2012-03-26"
+  s.date = "2012-04-17"
   s.description = "Code presentation tool using git"
   s.email = "pythonandchips@gmail.com"
   s.executables = ["git-presenter"]
