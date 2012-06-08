@@ -12,4 +12,5 @@ group :development do
   gem "bundler"
   gem "jeweler", "~> 1.6"
   gem "rcov", "~> 0.9"
+  gem 'pry'
 end
