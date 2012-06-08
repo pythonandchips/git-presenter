@@ -28,7 +28,6 @@ module GitPresenter
       end
       return commit(user_command.to_i) if command == :commit
       return bash_command(user_command) if command == :command
-      return :exit if command == :exit
       self.send(command)
     end
 
@@ -38,6 +37,10 @@ module GitPresenter
 
     def status_line
       "#{position+1}/#{total_slides} >"
+    end
+
+    def exit
+      `git checkout -q master`
     end
 
     def position
