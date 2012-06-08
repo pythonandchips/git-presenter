@@ -21,12 +21,12 @@ module GitPresenter
 
     def create_slides
       repo = Grit::Repo.new(".", "master")
-      repo.commits.reverse.map do |commit|
+      repo.commits("master", false).reverse.map do |commit|
         {"slide" =>
           {"commit"  => commit.id,
            "message" => commit.message}
         }
-    end
+      end
     end
   end
 end

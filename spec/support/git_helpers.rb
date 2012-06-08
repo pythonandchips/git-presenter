@@ -5,28 +5,26 @@ class GitHelper
     PRESENTATION_DIR
   end
 
-  def initialize(presentation_dir)
+  def initialize(presentation_dir=GitHelper::PRESENTATION_DIR)
     @presentation_dir = presentation_dir
   end
 
-  def initialise_test_repo(presentation_dir, delay)
+  def initialise_test_repo(presentation_dir, delay, no_of_commits)
     clean_up_repo(presentation_dir)
     @code_file = "a_file.rb"
     commits = []
+    content = ('a'..'z').to_a
     Dir.mkdir(presentation_dir)
     Dir.chdir(presentation_dir) do
       @git_repo = Grit::Repo.init(".")
-      edit_file_and_commit("initial commit", "a")
-      commits << @git_repo.commits[0]
-      #need to make it sleep for a second.
-      #git is not accurate enough with the speed of the test
-      #to sort correctly
-      sleep 1 if delay
-      edit_file_and_commit("second commit", "b")
-      commits << @git_repo.commits[0]
-      sleep 1 if delay
-      edit_file_and_commit("third commit", "c")
-      commits << @git_repo.commits[0]
+      (1..no_of_commits).each do |n|
+        edit_file_and_commit("commit number #{n}", content[n])
+        commits << @git_repo.commits[0]
+        #need to make it sleep for a second.
+        #git is not accurate enough with the speed of the test
+        #to sort correctly only when required
+        sleep 1 if delay
+      end
     end
     commits
   end
@@ -60,8 +58,9 @@ class GitHelper
     File.open(@presentation_dir + '/.git/HEAD').lines.first.strip
   end
 
-  def initialise_presentation(delay=false)
-    commits = initialise_test_repo(@presentation_dir, delay)
+  def initialise_presentation(params={})
+    settings = {:no_of_commits => 3, :delay => false}.merge(params)
+    commits = initialise_test_repo(@presentation_dir, settings[:delay], settings[:no_of_commits])
     Dir.chdir(@presentation_dir) do
       git_presentation = GitPresenter.initialise_presentation(".")
       yaml = YAML::parse(File.open(File.join(@presentation_dir, ".presentation"))).to_ruby
@@ -71,7 +70,7 @@ class GitHelper
   end
 
   def start_presentation(command="", add_command_to_commit=nil)
-    commits = initialise_presentation(true)
+    commits = initialise_presentation({:delay => true})
     Dir.chdir(@presentation_dir) do
       add_command(command, add_command_to_commit) unless command.empty?
       presenter = GitPresenter.start_presentation(".")
