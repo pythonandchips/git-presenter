@@ -17,7 +17,9 @@ Any and all feedback is welcome
 ## Pre-requisites
 
 * Git
-* Ruby version 1.9.2 or 1.9.3 or jruby in 1.9 mode (basically anything with 1.9 at the end)
+* Ruby version 1.9.2 or 1.9.3
+ 
+Note jruby is currently unsupported as there is a problem with posix-spawn and jruby
 
 ## Installation
 
