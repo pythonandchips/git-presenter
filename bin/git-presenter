@@ -1,24 +1,8 @@
 #!/usr/bin/ruby
-
 require "rubygems"
-require "readline"
 require_relative "../lib/git_presenter"
 
 YAML::ENGINE.yamler = 'psych'
 
-if ARGV[0] == "init"
-  GitPresenter.initialise_presentation(Dir.pwd)
-  puts "Presentation has been initalised"
-  puts "run 'git-presenter start' to begin the presentation"
-elsif ARGV[0] == "start"
-  presenter = GitPresenter.start_presentation(Dir.pwd)
-  puts presenter.current_slide
-
-  while command = Readline.readline(presenter.status_line, true)
-    result = presenter.execute(command)
-    exit if result == :exit
-    puts result
-  end
-else
-  puts "what you talkin bout willis"
-end
+presenter = GitPresenter.new(Dir.pwd)
+presenter.execute(ARGV[0])

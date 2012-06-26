@@ -1,19 +1,38 @@
 require "grit"
 require "yaml"
+require "readline"
 
-module GitPresenter
+class GitPresenter
   require "git_presenter/presentation"
-  require "git_presenter/writer"
-  require "git_presenter/parser"
+  require "git_presenter/controller"
   require "git_presenter/slide"
 
-  def self.initialise_presentation dir
-    builder = Writer.new(dir)
-    builder.output_presenatation_file
+  def initialize(current_dir, interactive=true)
+    @controller = Controller.new(current_dir)
+    @interactive = interactive
   end
 
-  def self.start_presentation dir
-    parser = Parser.new(dir)
-    parser.presentation
+  def execute(command)
+    if command == "init"
+      @controller.initialise_presentation
+    elsif command == "start"
+      @presentation = @controller.start_presentation
+      if @interactive
+        enter_run_loop
+      end
+    else
+      puts @presentation.execute(command)
+    end
+    @presentation
+  end
+
+  private
+
+  def enter_run_loop
+    while command = Readline.readline(@presentation.status_line, true)
+      result = @presentation.execute(command)
+      exit if result == :exit
+      puts result
+    end
   end
 end

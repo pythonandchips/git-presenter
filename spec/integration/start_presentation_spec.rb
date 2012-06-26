@@ -11,8 +11,9 @@ describe "starting a presentation" do
     @helper.initialise_presentation
     @helper.add_command("echo hello world")
     Dir.chdir(presentation_dir) do
-      presenter = GitPresenter.start_presentation(".")
-      presenter.slides.length.should eql 4
+      presenter = GitPresenter.new(".", false)
+      presentation = presenter.execute('start')
+      presentation.slides.length.should eql 4
     end
   end
 

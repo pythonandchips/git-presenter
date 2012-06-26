@@ -158,7 +158,7 @@ EOH
       command_line_helper = CommandLineHelper.capture_output
       @helper.start_presentation do |commits, presenter|
         presenter.execute("!echo hello world")
-        command_line_helper.command_output.strip.should eql "hello world"
+        command_line_helper.command_output.strip.should end_with "hello world"
       end
     end
   end

@@ -62,7 +62,8 @@ class GitHelper
     settings = {:no_of_commits => 3, :delay => false}.merge(params)
     commits = initialise_test_repo(@presentation_dir, settings[:delay], settings[:no_of_commits])
     Dir.chdir(@presentation_dir) do
-      git_presentation = GitPresenter.initialise_presentation(".")
+      presentation = GitPresenter.new(@presentation_dir, false)
+      git_presentation = presentation.execute("init")
       yaml = YAML::parse(File.open(File.join(@presentation_dir, ".presentation"))).to_ruby
       yield(commits, yaml) if block_given?
     end
@@ -73,7 +74,8 @@ class GitHelper
     commits = initialise_presentation({:delay => true})
     Dir.chdir(@presentation_dir) do
       add_command(command, add_command_to_commit) unless command.empty?
-      presenter = GitPresenter.start_presentation(".")
+      presenter = GitPresenter.new('.', false)
+      presenter = presenter.execute('start')
       yield(commits, presenter) if block_given?
     end
   end
