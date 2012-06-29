@@ -20,6 +20,8 @@ class GitPresenter
       if @interactive
         enter_run_loop
       end
+    elsif command == "update"
+      @controller.update_presentation
     else
       puts @presentation.execute(command)
     end

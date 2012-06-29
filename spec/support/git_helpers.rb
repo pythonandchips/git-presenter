@@ -40,6 +40,7 @@ class GitHelper
     edit_file(content)
     @git_repo.add(".")
     @git_repo.commit_all(commit_message)
+    @git_repo.commits[0]
   end
 
   def setup_presentation_file(commits)
@@ -78,6 +79,27 @@ class GitHelper
       presenter = presenter.execute('start')
       yield(commits, presenter) if block_given?
     end
+  end
+
+  def update_presentation
+    Dir.chdir(@presentation_dir) do
+      presentation = GitPresenter.new(@presentation_dir, false)
+      presentation.execute("update")
+      yaml = YAML::parse(File.open(File.join(@presentation_dir, ".presentation"))).to_ruby
+      yield(yaml) if block_given?
+    end
+  end
+
+  def remove_from_presentation_at(index)
+    removed_commit = nil
+    Dir.chdir(@presentation_dir) do
+      yaml = YAML.parse(File.open(@presentation_dir + "/.presentation", "r")).to_ruby
+      removed_commit = yaml['slides'].delete_at(index)
+      File.open(File.open(File.join(@presentation_dir, ".presentation")), "w") do |file|
+        file.write(yaml.to_yaml)
+      end
+    end
+    removed_commit
   end
 
   def add_command(command, add_command_to_commit=nil)
