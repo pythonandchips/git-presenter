@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "git_presenter"
-  s.version = "0.2.2"
+  s.version = "0.3.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Colin Gemmell"]
-  s.date = "2012-04-17"
+  s.date = "2012-06-29"
   s.description = "Code presentation tool using git"
   s.email = "pythonandchips@gmail.com"
   s.executables = ["git-presenter"]
@@ -29,16 +29,17 @@ Gem::Specification.new do |s|
     "bin/git-presenter",
     "git_presenter.gemspec",
     "lib/git_presenter.rb",
-    "lib/git_presenter/parser.rb",
+    "lib/git_presenter/controller.rb",
     "lib/git_presenter/presentation.rb",
     "lib/git_presenter/slide.rb",
-    "lib/git_presenter/writer.rb",
+    "spec/bugs/max_10_commits_being_parsed_spec.rb",
     "spec/integration/initialize_presentation_spec.rb",
     "spec/integration/moving_through_presentation_spec.rb",
     "spec/integration/start_presentation_spec.rb",
+    "spec/integration/update_presentation_spec.rb",
+    "spec/lib/git_presenter/controller_spec.rb",
     "spec/lib/git_presenter/presentation_spec.rb",
     "spec/lib/git_presenter/slide_spec.rb",
-    "spec/lib/git_presenter/writer_spec.rb",
     "spec/spec_helper.rb",
     "spec/support/command_line_helper.rb",
     "spec/support/git_helpers.rb"
@@ -54,23 +55,29 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<grit>, ["~> 2.4"])
+      s.add_development_dependency(%q<pry>, [">= 0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.7"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_development_dependency(%q<rcov>, ["~> 0.9"])
+      s.add_development_dependency(%q<pry>, [">= 0"])
     else
       s.add_dependency(%q<grit>, ["~> 2.4"])
+      s.add_dependency(%q<pry>, [">= 0"])
       s.add_dependency(%q<rspec>, ["~> 2.7"])
       s.add_dependency(%q<bundler>, [">= 0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6"])
       s.add_dependency(%q<rcov>, ["~> 0.9"])
+      s.add_dependency(%q<pry>, [">= 0"])
     end
   else
     s.add_dependency(%q<grit>, ["~> 2.4"])
+    s.add_dependency(%q<pry>, [">= 0"])
     s.add_dependency(%q<rspec>, ["~> 2.7"])
     s.add_dependency(%q<bundler>, [">= 0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6"])
     s.add_dependency(%q<rcov>, ["~> 0.9"])
+    s.add_dependency(%q<pry>, [">= 0"])
   end
 end
 
