@@ -18,7 +18,7 @@ Any and all feedback is welcome
 
 * Git
 * Ruby version 1.9.2 or 1.9.3
- 
+
 Note jruby is currently unsupported as there is a problem with posix-spawn and jruby
 
 ## Installation
@@ -30,6 +30,7 @@ gem install git_presenter
 * Commit to git as you develop your code.
 * When the code is ready use the "git-presenter init" command to initialise
 * Once it is initialised you can start the presentation with "git-presenter start"
+* Make more commits if need be and use "git-presenter update"
 * Then use the following command to navigate the presentation
 * next/n: move to next slide
 * back/b: move back a slide
