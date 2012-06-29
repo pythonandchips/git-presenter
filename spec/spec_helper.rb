@@ -1,4 +1,5 @@
 require 'rspec'
+require 'pry'
 require "support/git_helpers"
 require "support/command_line_helper"
 require_relative "../lib/git_presenter"

@@ -115,4 +115,12 @@ class GitHelper
       end
     end
   end
+
+  def current_branch
+    Dir.chdir(PRESENTATION_DIR) do
+      repo = Grit::Repo.init('.')
+      repo.head
+    end
+  end
+
 end

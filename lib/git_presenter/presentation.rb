@@ -37,6 +37,10 @@ class GitPresenter::Presentation
 
   def status_line
     "#{position+1}/#{total_slides} >"
+    end
+
+    def exit
+      `git checkout -q master`
   end
 
   def position

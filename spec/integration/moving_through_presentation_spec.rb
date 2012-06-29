@@ -162,4 +162,15 @@ EOH
       end
     end
   end
+
+  context "when exiting a presentation" do
+    it "should set the repo back to the master branch" do
+      @helper.start_presentation do |commits, presenter|
+        presenter.execute("next")
+        presenter.execute("exit")
+        @helper.current_branch.should_not be_nil
+        @helper.current_branch.name.should eql "master"
+      end
+    end
+  end
 end
