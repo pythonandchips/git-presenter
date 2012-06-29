@@ -6,7 +6,7 @@ require 'pry'
 
 RSpec.configure do |config|
   config.before(:each) do
-    CommandLineHelper.capture_output
+    @command_line = CommandLineHelper.capture_output
   end
 end
 

@@ -28,6 +28,7 @@ class GitPresenter::Controller
     yaml["slides"] = yaml["slides"] + slides
     yaml["slides"].uniq!
     write_file(yaml.to_yaml)
+    puts "Your presentation has been updated"
   end
 
   private
