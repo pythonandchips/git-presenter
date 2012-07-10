@@ -40,6 +40,7 @@ class GitPresenter::Presentation
 
   def exit
     `git checkout -q master`
+    :exit
   end
 
   def position
