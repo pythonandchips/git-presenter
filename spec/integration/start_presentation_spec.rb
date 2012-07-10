@@ -31,7 +31,7 @@ describe "starting a presentation" do
 
   it "the last commit should be a command" do
     command = "echo hello world"
-    @helper.start_presentation(command) do |commits, presenter|
+    @helper.start_presentation([:run => command]) do |commits, presenter|
       presenter.slides[3].run.should eql command
     end
   end

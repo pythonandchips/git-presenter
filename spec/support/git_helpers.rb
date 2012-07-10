@@ -71,10 +71,10 @@ class GitHelper
     commits
   end
 
-  def start_presentation(command="", add_command_to_commit=nil)
+  def start_presentation(commands=[])
     commits = initialise_presentation({:delay => true})
     Dir.chdir(@presentation_dir) do
-      add_command(command, add_command_to_commit) unless command.empty?
+      add_commands(commands) unless commands.empty?
       presenter = GitPresenter.new('.', false)
       presenter = presenter.execute('start')
       yield(commits, presenter) if block_given?
@@ -100,6 +100,31 @@ class GitHelper
       end
     end
     removed_commit
+  end
+
+  def add_commands(commands)
+    commands.each do |command|
+      if command.include?(:run)
+        add_command(command[:run], command[:on_slide])
+      end
+      if command.include?(:launch)
+        add_launch(command[:launch], command[:on_slide])
+      end
+    end
+  end
+
+  def add_launch(command, add_command_to_commit=nil)
+    Dir.chdir(PRESENTATION_DIR) do
+      presentation = YAML.parse(File.open(".presentation")).to_ruby
+      if !add_command_to_commit.nil?
+        presentation["slides"][add_command_to_commit]["slide"]["launch"] = command
+      else
+        presentation["slides"] << {"slide" => {"launch" => command}}
+      end
+      File.open(".presentation", "w") do |file|
+        file.write(presentation.to_yaml)
+      end
+    end
   end
 
   def add_command(command, add_command_to_commit=nil)

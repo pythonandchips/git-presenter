@@ -31,6 +31,23 @@ describe GitPresenter::Slide do
       end
     end
 
+    context "when slide contains a launch command" do
+      it "should launch the application for the file type" do
+        command_line_helper = CommandLineHelper.capture_output
+        Launchy.should_receive(:open).with("readme").once
+        slide = GitPresenter::Slide.new({"launch" => "readme"})
+        slide.execute
+      end
+
+      it "should not try and launch if no launch supplied" do
+        command_line_helper = CommandLineHelper.capture_output
+        Launchy.should_receive(:open).with("readme").never
+        slide = GitPresenter::Slide.new({"commit" => "number", "message" => "checkout", "run" => "echo hello world"})
+        slide.stub(:checkout).and_return("checkout\n")
+        slide.execute.should eql "checkout\nhello world\n"
+      end
+    end
+
     context "when slide contains only a commit" do
       it "should checkout the code then run the command" do
         command_line_helper = CommandLineHelper.capture_output

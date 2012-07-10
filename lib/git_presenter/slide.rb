@@ -5,12 +5,14 @@ class GitPresenter::Slide
     @commit  = slide["commit"]
     @message = slide["message"]
     @run = slide["run"]
+    @launch = slide["launch"]
   end
 
   def execute
     output = ""
     output << checkout unless @commit.nil?
     output << `#{run}` unless @run.nil?
+    Launchy.open(@launch) unless @launch.nil?
     output
   end
 

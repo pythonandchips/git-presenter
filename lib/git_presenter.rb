@@ -1,11 +1,12 @@
-require "grit"
-require "yaml"
-require "readline"
+require 'grit'
+require 'yaml'
+require 'readline'
+require 'launchy'
 
 class GitPresenter
-  require "git_presenter/presentation"
-  require "git_presenter/controller"
-  require "git_presenter/slide"
+  require 'git_presenter/presentation'
+  require 'git_presenter/controller'
+  require 'git_presenter/slide'
 
   def initialize(current_dir, interactive=true)
     @controller = Controller.new(current_dir)
@@ -13,14 +14,14 @@ class GitPresenter
   end
 
   def execute(command)
-    if command == "init"
+    if command == 'init'
       @controller.initialise_presentation
-    elsif command == "start"
+    elsif command == 'start'
       @presentation = @controller.start_presentation
       if @interactive
         enter_run_loop
       end
-    elsif command == "update"
+    elsif command == 'update'
       @controller.update_presentation
     else
       puts @presentation.execute(command)
