@@ -11,8 +11,7 @@ Git-presenter hope to solve this problem by giving a presentation style interfac
 
 ## Current status
 
-Early version but the basics are there to be used.
-Any and all feedback is welcome
+Complete.
 
 ## Pre-requisites
 
