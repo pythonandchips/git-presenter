@@ -28,13 +28,13 @@ describe "initializing a presentation" do
 
     it "first line should contain the first commit number" do
       @helper.initialise_presentation({:delay => true}) do |commits, yaml|
-        yaml["slides"][0]["slide"]["commit"].should eql commits.first.id
+        yaml["slides"][0]["slide"]["commit"].should eql commits.first.sha
       end
     end
 
     it "second line should contain the second commit number" do
       @helper.initialise_presentation({:delay => true}) do |commits, yaml|
-        yaml["slides"][1]["slide"]["commit"].should eql commits[1].id
+        yaml["slides"][1]["slide"]["commit"].should eql commits[1].sha
       end
     end
   end

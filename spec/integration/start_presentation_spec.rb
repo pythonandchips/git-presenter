@@ -19,13 +19,13 @@ describe "starting a presentation" do
 
   it "first commit should be first commit in file" do
     @helper.start_presentation do |commits, presenter|
-      presenter.slides[0].commit.should eql commits[0].id
+      presenter.slides[0].commit.should eql commits[0].sha
     end
   end
 
   it "second commit should be second commit in file" do
     @helper.start_presentation do |commits, presenter|
-      presenter.slides[1].commit.should eql commits[1].id
+      presenter.slides[1].commit.should eql commits[1].sha
     end
   end
 
@@ -38,7 +38,7 @@ describe "starting a presentation" do
 
   it "should have the presentation at first commit" do
     @helper.start_presentation do |commits, presenter|
-      @helper.head_position.should eql commits.first.id
+      @helper.head_position.should eql commits.first.sha
     end
   end
 end

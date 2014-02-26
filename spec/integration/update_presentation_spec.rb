@@ -18,7 +18,7 @@ describe "update presentation with any new commits" do
     commits = @helper.initialise_presentation({:delay => true})
     new_commit = @helper.edit_file_and_commit("forth commit", "d")
     @helper.update_presentation do |yaml|
-      yaml["slides"].last["slide"]["commit"].should eql new_commit.id
+      yaml["slides"].last["slide"]["commit"].should eql new_commit.sha
     end
   end
 

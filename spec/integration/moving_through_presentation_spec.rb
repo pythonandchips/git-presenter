@@ -11,7 +11,7 @@ describe "while giving presentation" do
     it "should move to the next commit" do
       @helper.start_presentation do |commits, presenter|
         presenter.execute("next")
-        @helper.head_position.should eql commits[1].id
+        @helper.head_position.should eql commits[1].sha
       end
     end
 
@@ -19,7 +19,7 @@ describe "while giving presentation" do
       @helper.start_presentation do |commits, presenter|
         presenter.execute("next")
         presenter.execute("next")
-        @helper.head_position.should eql commits[2].id
+        @helper.head_position.should eql commits[2].sha
       end
     end
   end
@@ -30,7 +30,7 @@ describe "while giving presentation" do
         presenter.execute("next")
         @helper.edit_file("inner commit")
         presenter.execute("next")
-        @helper.head_position.should eql commits[2].id
+        @helper.head_position.should eql commits[2].sha
       end
     end
   end
@@ -42,7 +42,7 @@ describe "while giving presentation" do
         presenter.execute("next")
         presenter.execute("next")
         presenter.execute("next")
-        @helper.head_position.should eql commits[2].id
+        @helper.head_position.should eql commits[2].sha
       end
     end
   end
@@ -53,7 +53,7 @@ describe "while giving presentation" do
         presenter.execute("next")
         presenter.execute("next")
         presenter.execute("back")
-        @helper.head_position.should eql commits[1].id
+        @helper.head_position.should eql commits[1].sha
       end
     end
   end
@@ -67,7 +67,7 @@ describe "while giving presentation" do
         presenter.execute("back")
         presenter.execute("back")
         presenter.execute("back")
-        @helper.head_position.should eql commits[0].id
+        @helper.head_position.should eql commits[0].sha
       end
     end
   end
@@ -78,7 +78,7 @@ describe "while giving presentation" do
         presenter.execute("next")
         presenter.execute("next")
         presenter.execute("start")
-        @helper.head_position.should eql commits[0].id
+        @helper.head_position.should eql commits[0].sha
       end
     end
   end
@@ -87,7 +87,7 @@ describe "while giving presentation" do
     it "should move the last commit" do
       @helper.start_presentation do |commits, presenter|
         presenter.execute("end")
-        @helper.head_position.should eql commits.last.id
+        @helper.head_position.should eql commits.last.sha
       end
     end
   end
@@ -96,7 +96,7 @@ describe "while giving presentation" do
     it "should checkout the specific commit" do
       @helper.start_presentation do |commits, presenter|
         presenter.execute("2")
-        @helper.head_position.should eql commits[1].id
+        @helper.head_position.should eql commits[1].sha
       end
     end
   end
@@ -104,7 +104,7 @@ describe "while giving presentation" do
   context "list presentation" do
     it "should print a list of commits" do
       @helper.start_presentation do |commits, presenter|
-        expected_output = (["*#{commits.first.id[0..9]}, #{commits.first.message}"] + commits[1..-1].map{|commit| "#{commit.id[0..9]}, #{commit.message}"}).join("\n")
+        expected_output = (["*#{commits.first.sha[0..9]}, #{commits.first.message}"] + commits[1..-1].map{|commit| "#{commit.sha[0..9]}, #{commit.message}"}).join("\n")
         presentation = presenter.execute("list")
         presentation.should eql expected_output
       end
@@ -180,7 +180,7 @@ EOH
         presenter.execute("next")
         presenter.execute("exit")
         @helper.current_branch.should_not be_nil
-        @helper.current_branch.name.should eql "master"
+        @helper.current_branch.should eql "master"
       end
     end
   end

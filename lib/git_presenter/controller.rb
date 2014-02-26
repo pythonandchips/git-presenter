@@ -44,12 +44,12 @@ class GitPresenter::Controller
   end
 
   def create_slides(last_commit=nil)
-    repo = Grit::Repo.new(".", "master")
-    commits = repo.commits("master", false).reverse
-    commits = commits.drop_while{|commit| commit.id != last_commit}[1..-1] unless last_commit.nil?
+    repo = Git.open(".")
+    commits = repo.log.to_a.reverse
+    commits = commits.drop_while{|commit| commit.sha != last_commit}[1..-1] unless last_commit.nil?
     commits.map do |commit|
       {"slide" =>
-        {"commit"  => commit.id,
+         {"commit"  => commit.sha,
          "message" => commit.message}
       }
     end

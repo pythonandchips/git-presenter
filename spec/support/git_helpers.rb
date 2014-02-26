@@ -16,10 +16,10 @@ class GitHelper
     content = ('a'..'z').to_a
     Dir.mkdir(presentation_dir)
     Dir.chdir(presentation_dir) do
-      @git_repo = Grit::Repo.init(".")
+      @git_repo = Git.init(".")
       (1..no_of_commits).each do |n|
-        edit_file_and_commit("commit number #{n}", content[n])
-        commits << @git_repo.commits[0]
+        commit = edit_file_and_commit("commit number #{n}", content[n])
+        commits << commit
         #need to make it sleep for a second.
         #git is not accurate enough with the speed of the test
         #to sort correctly only when required
@@ -40,7 +40,7 @@ class GitHelper
     edit_file(content)
     @git_repo.add(".")
     @git_repo.commit_all(commit_message)
-    @git_repo.commits[0]
+    @git_repo.log.to_a[0]
   end
 
   def setup_presentation_file(commits)
@@ -56,7 +56,7 @@ class GitHelper
   end
 
   def head_position
-    File.open(@presentation_dir + '/.git/HEAD').lines.first.strip
+    File.open(@presentation_dir + '/.git/HEAD').each_line.first.strip
   end
 
   def initialise_presentation(params={})
@@ -143,8 +143,8 @@ class GitHelper
 
   def current_branch
     Dir.chdir(PRESENTATION_DIR) do
-      repo = Grit::Repo.init('.')
-      repo.head
+      repo = Git.open('.')
+      repo.current_branch
     end
   end
 

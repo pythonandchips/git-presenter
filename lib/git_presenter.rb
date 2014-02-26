@@ -1,4 +1,4 @@
-require 'grit'
+require 'git'
 require 'yaml'
 require 'readline'
 require 'launchy'
