@@ -13,6 +13,4 @@ group :development do
   gem "rspec", "~> 2.7"
   gem "bundler"
   gem "jeweler", "~> 1.6"
-  gem "rcov", "~> 0.9"
-  gem 'pry'
 end
