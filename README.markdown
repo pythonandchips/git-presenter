@@ -11,8 +11,7 @@ Git-presenter hope to solve this problem by giving a presentation style interfac
 
 ## Current status
 
-Early version but the basics are there to be used.
-Any and all feedback is welcome
+Complete.
 
 ## Pre-requisites
 
@@ -36,6 +35,11 @@ gem install git_presenter
 * start/s: move to start of presentation
 * list/l : list slides in presentation
 * help/h: display this message
+ 
+## Other resources
+There are couple of videos showing git presenter and how to us it
+* (video 1)[https://vimeo.com/38949496]
+* (video 2)[https://vimeo.com/39225144]
 
 ## Bugs/Features/Prase
 
