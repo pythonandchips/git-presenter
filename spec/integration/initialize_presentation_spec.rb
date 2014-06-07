@@ -20,6 +20,12 @@ describe "initializing a presentation" do
       end
     end
 
+    it 'should have a branch note' do
+      @helper.initialise_presentation do |commits, yaml|
+        yaml["branch"].should_not be_nil
+      end
+    end
+
     it "should contain a line for each commit to the repository" do
       @helper.initialise_presentation do |commits, yaml|
         yaml["slides"].length.should eql commits.length

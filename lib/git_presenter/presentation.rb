@@ -2,6 +2,7 @@ class GitPresenter::Presentation
   attr_reader :slides, :current_slide
 
   def initialize(presentation)
+    @branch = presentation["branch"]
     @slides = presentation["slides"].map{|slide| GitPresenter::Slide.new(slide["slide"])}
     @current_slide = slides.first
   end
@@ -39,7 +40,7 @@ class GitPresenter::Presentation
   end
 
   def exit
-    `git checkout -q master`
+    `git checkout -q #{@branch}`
     :exit
   end
 

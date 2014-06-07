@@ -6,7 +6,7 @@ class GitPresenter::Controller
   end
 
   def initialise_presentation
-    yaml = {"slides" => create_slides}.to_yaml
+    yaml = {"slides" => create_slides, "branch" => current_branch}.to_yaml
     File.open(presentation_file_location, "w") do |file|
       file.write(yaml)
     end
@@ -24,7 +24,6 @@ class GitPresenter::Controller
   def update_presentation
     yaml = YAML.parse(File.open(@presentation_dir + "/.presentation", "r")).to_ruby
     slides = create_slides(yaml['slides'].last["slide"]["commit"])
-    last_commit = yaml["slides"].last
     yaml["slides"] = yaml["slides"] + slides
     yaml["slides"].uniq!
     write_file(yaml.to_yaml)
@@ -53,5 +52,9 @@ class GitPresenter::Controller
          "message" => commit.message}
       }
     end
+  end
+
+  def current_branch
+    `git rev-parse --abbrev-ref HEAD`.strip
   end
 end

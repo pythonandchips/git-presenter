@@ -4,7 +4,8 @@ describe GitPresenter::Presentation do
   let(:presentation){ {"slides" => [
                           {"slide" => {"commit" => "0"}},
                           {"slide" => {"commit" => "1"}},
-                          {"slide" => {"commit" => "2"}}]
+                          {"slide" => {"commit" => "2"}}],
+                       "branch" => "test"
                       }
                     }
   context "when displaying the command line" do
@@ -82,6 +83,17 @@ describe GitPresenter::Presentation do
 
     context "with help" do
       it { given_command("help").should eql :help}
+    end
+
+    context "with exit" do
+      it { given_command("exit").should eql :exit}
+      it 'checks out to the correct branch' do
+        presenter = GitPresenter::Presentation.new(presentation)
+
+        expect(presenter).to receive(:'`').with("git checkout -q #{presentation['branch']}")
+
+        presenter.exit
+      end
     end
   end
 end

@@ -4,9 +4,9 @@ require 'readline'
 require 'launchy'
 
 class GitPresenter
-  require 'git_presenter/presentation'
-  require 'git_presenter/controller'
-  require 'git_presenter/slide'
+  require_relative 'git_presenter/presentation'
+  require_relative 'git_presenter/controller'
+  require_relative 'git_presenter/slide'
 
   def initialize(current_dir, interactive=true)
     @controller = Controller.new(current_dir)
