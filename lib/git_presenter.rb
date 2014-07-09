@@ -7,6 +7,7 @@ class GitPresenter
   require_relative 'git_presenter/presentation'
   require_relative 'git_presenter/controller'
   require_relative 'git_presenter/slide'
+  require_relative 'git_presenter/shell'
 
   def initialize(current_dir, interactive=true)
     @controller = Controller.new(current_dir)
@@ -24,9 +25,16 @@ class GitPresenter
     elsif command == 'update'
       @controller.update_presentation
     else
+      if @presentation.nil?
+        @presentation = @controller.load_presentation
+      end
       puts @presentation.execute(command)
     end
     @presentation
+  end
+
+  def current_slide
+    @presentation.current_slide
   end
 
   private

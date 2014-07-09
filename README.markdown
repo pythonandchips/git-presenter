@@ -36,6 +36,14 @@ gem install git_presenter
 * list/l : list slides in presentation
 * help/h: display this message
 
+###Command mode
+
+The default for git presenter is interactive mode however if you want to use git presenter from a text editor you can use command mode.
+
+To start a presentation in command mode use "git-presenter start -c"
+
+Once started you run "git-presenter {{command}}" e.g. to move to the next slide run "git-presenter next"
+
 ## Other resources
 There are couple of videos showing git presenter and how to us it
 * (video 1)[https://vimeo.com/38949496]
@@ -82,4 +90,3 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
 LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
 OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-

@@ -14,9 +14,13 @@ class GitPresenter::Controller
     puts "run 'git-presenter start' to begin the presentation"
   end
 
-  def start_presentation
+  def load_presentation
     yaml = YAML.parse(File.open(@presentation_dir + "/.presentation", "r")).to_ruby
-    presenter = GitPresenter::Presentation.new(yaml)
+    GitPresenter::Presentation.new(yaml)
+  end
+
+  def start_presentation
+    presenter = load_presentation
     puts presenter.start
     presenter
   end

@@ -1,10 +1,16 @@
 class GitPresenter::Presentation
   attr_reader :slides, :current_slide
 
-  def initialize(presentation)
+  def initialize(presentation, shell=GitPresenter::Shell.new)
     @branch = presentation["branch"]
     @slides = presentation["slides"].map{|slide| GitPresenter::Slide.new(slide["slide"])}
-    @current_slide = slides.first
+    @shell = shell
+    @current_slide = find_current_slide
+  end
+
+  def find_current_slide
+    sha = @shell.run("git rev-parse HEAD").strip
+    @slides.detect{|s| s.commit == sha}
   end
 
   def command_for(command)
@@ -45,7 +51,7 @@ class GitPresenter::Presentation
   end
 
   def position
-    slides.index(@current_slide)
+    @slides.index(@current_slide)
   end
 
   def total_slides

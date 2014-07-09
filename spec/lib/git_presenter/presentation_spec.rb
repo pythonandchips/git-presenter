@@ -1,5 +1,14 @@
 require "spec_helper"
 
+class FakeShell
+  attr_reader :ran_commands
+  def initialize()
+    @ran_commands = []
+  end
+  def run(command)
+    @ran_commands << command
+  end
+end
 describe GitPresenter::Presentation do
   let(:presentation){ {"slides" => [
                           {"slide" => {"commit" => "0"}},
@@ -8,9 +17,11 @@ describe GitPresenter::Presentation do
                        "branch" => "test"
                       }
                     }
+  let(:fake_shell){ FakeShell.new }
   context "when displaying the command line" do
     it "should display the current position" do
-      presenter = GitPresenter::Presentation.new(presentation)
+      fake_shell.should_receive(:run).with("git rev-parse HEAD").and_return("0")
+      presenter = GitPresenter::Presentation.new(presentation, fake_shell)
       presenter.status_line.should eql "1/3 >"
     end
   end
@@ -18,7 +29,8 @@ describe GitPresenter::Presentation do
 
   context "when calculating the position" do
     it "should return the index of the current commit" do
-      presenter = GitPresenter::Presentation.new(presentation)
+      fake_shell.should_receive(:run).with("git rev-parse HEAD").and_return("0")
+      presenter = GitPresenter::Presentation.new(presentation, fake_shell)
       presenter.position.should eql 0
     end
   end

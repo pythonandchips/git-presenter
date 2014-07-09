@@ -184,4 +184,13 @@ EOH
       end
     end
   end
+
+  context "when running in command mode" do
+    it "should set the current slide to commit" do
+      @helper.start_presentation([], 1) do |commits, presenter|
+        presenter.execute("list")
+        presenter.current_slide.commit.should eql commits[1].sha
+      end
+    end
+  end
 end

@@ -4,5 +4,11 @@ require_relative "../lib/git_presenter"
 
 YAML::ENGINE.yamler = 'psych'
 
-presenter = GitPresenter.new(Dir.pwd)
+if ARGV[1] == "-c"
+  interactive = false
+else
+  interactive = true
+end
+
+presenter = GitPresenter.new(Dir.pwd, interactive)
 presenter.execute(ARGV[0])

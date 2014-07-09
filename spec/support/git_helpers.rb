@@ -71,12 +71,17 @@ class GitHelper
     commits
   end
 
-  def start_presentation(commands=[])
+  def start_presentation(commands=[], start_slide=0)
     commits = initialise_presentation({:delay => true})
     Dir.chdir(@presentation_dir) do
       add_commands(commands) unless commands.empty?
+      if start_slide != 0
+        `git checkout -q #{commits[start_slide]}`
+      end
       presenter = GitPresenter.new('.', false)
-      presenter = presenter.execute('start')
+      if start_slide == 0
+        presenter = presenter.execute('start')
+      end
       yield(commits, presenter) if block_given?
     end
   end
