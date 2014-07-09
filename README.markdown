@@ -1,6 +1,6 @@
 # git-presenter
 
-[![Build Status](https://secure.travis-ci.org/pythonandchips/git-presenter.png?branch=master)](http://travis-ci.org/pythonandchips/git-presenter)
+[![Build Status](https://drone.io/github.com/pythonandchips/git-presenter/status.png)](https://drone.io/github.com/pythonandchips/git-presenter/latest)
 
 When presenting code live on stage you have a few choices:
 
