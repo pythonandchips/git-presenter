@@ -36,7 +36,7 @@ gem install git_presenter
 * list/l : list slides in presentation
 * help/h: display this message
 
-###Command mode
+### Command mode
 
 The default for git presenter is interactive mode however if you want to use git presenter from a text editor you can use command mode.
 
@@ -49,7 +49,7 @@ There are couple of videos showing git presenter and how to us it
 * (video 1)[https://vimeo.com/38949496]
 * (video 2)[https://vimeo.com/39225144]
 
-## Bugs/Features/Prase
+## Bugs/Features/Praise
 
 It you find any bugs or have some feature requests please add an issue on the repository. Or if you just want to get in touch and tell me how awesome git presenter is you can get me on twitter @colin_gemmell or drop me an email at pythonandchips{at}gmail.com
 
