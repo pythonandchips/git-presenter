@@ -10,7 +10,7 @@ describe "initializing a presentation" do
   context ".presentation file" do
     it "should be written to root directory" do
       @helper.initialise_presentation do
-        File.exists?(".presentation").should be_true
+        File.exists?(".presentation").should be_truthy
       end
     end
 
