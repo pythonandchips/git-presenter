@@ -2,7 +2,7 @@
 require "rubygems"
 require_relative "../lib/git_presenter"
 
-YAML::ENGINE.yamler = 'psych'
+YAML::ENGINE.yamler = 'psych' if defined?(Psych::ENGINE)
 
 if ARGV[1] == "-c"
   interactive = false
