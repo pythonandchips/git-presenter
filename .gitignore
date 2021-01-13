@@ -5,3 +5,5 @@ doc
 .bundle
 pkg
 presentation
+a_file.rb
+git_presenter*.gem
