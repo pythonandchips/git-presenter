@@ -10,7 +10,7 @@ describe "update presentation with any new commits" do
     commits = @helper.initialise_presentation({:delay => true})
     new_commit = @helper.edit_file_and_commit("forth commit", "d")
     @helper.update_presentation do |yaml|
-      yaml["slides"].length.should eql (commits.length + 1)
+      expect(yaml["slides"].length).to eql (commits.length + 1)
     end
   end
 
@@ -18,7 +18,7 @@ describe "update presentation with any new commits" do
     commits = @helper.initialise_presentation({:delay => true})
     new_commit = @helper.edit_file_and_commit("forth commit", "d")
     @helper.update_presentation do |yaml|
-      yaml["slides"].last["slide"]["commit"].should eql new_commit.sha
+      expect(yaml["slides"].last["slide"]["commit"]).to eql new_commit.sha
     end
   end
 
@@ -27,7 +27,7 @@ describe "update presentation with any new commits" do
     removed_commit = @helper.remove_from_presentation_at(1)
     new_commit = @helper.edit_file_and_commit("forth commit", "d")
     @helper.update_presentation do |yaml|
-      yaml["slides"].length.should eql (commits.length)
+      expect(yaml["slides"].length).to eql (commits.length)
     end
   end
 
@@ -36,7 +36,7 @@ describe "update presentation with any new commits" do
     removed_commit = @helper.remove_from_presentation_at(1)
     new_commit = @helper.edit_file_and_commit("forth commit", "d")
     @helper.update_presentation
-    @command_line.command_output.should include "Your presentation has been updated"
+    expect(@command_line.command_output).to include "Your presentation has been updated"
   end
 
 end

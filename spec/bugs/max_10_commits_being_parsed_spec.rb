@@ -7,7 +7,7 @@ describe "presentation should parse all commits for a repo" do
 
   it "should parse more than 10 commits" do
     @helper.initialise_presentation({:no_of_commits => 13}) do |commits, yaml|
-      yaml["slides"].length.should eql 13
+      expect(yaml["slides"].length).to eql 13
     end
   end
 end

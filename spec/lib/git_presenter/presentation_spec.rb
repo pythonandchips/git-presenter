@@ -22,16 +22,16 @@ describe GitPresenter::Presentation do
     it "should display the current position" do
       fake_shell.should_receive(:run).with("git rev-parse HEAD").and_return("0")
       presenter = GitPresenter::Presentation.new(presentation, fake_shell)
-      presenter.status_line.should eql "1/3 >"
+      expect(presenter.status_line).to eql "1/3 >"
     end
   end
 
 
   context "when calculating the position" do
     it "should return the index of the current commit" do
-      fake_shell.should_receive(:run).with("git rev-parse HEAD").and_return("0")
+      expect(fake_shell).to receive(:run).with("git rev-parse HEAD").and_return("0")
       presenter = GitPresenter::Presentation.new(presentation, fake_shell)
-      presenter.position.should eql 0
+      expect(presenter.position).to eql 0
     end
   end
 
@@ -42,59 +42,59 @@ describe GitPresenter::Presentation do
     end
 
     context "with bash command" do
-      it { given_command("!echo hello world").should eql :command }
+      it { expect(given_command("!echo hello world")).to eql :command }
     end
 
     context "with next" do
-      it { given_command("next").should eql :next }
+      it { expect(given_command("next")).to eql :next }
     end
 
     context "with next" do
-      it { given_command("n").should eql :next }
+      it { expect(given_command("n")).to eql :next }
     end
 
     context "with back" do
-      it { given_command("back").should eql :previous }
+      it { expect(given_command("back")).to eql :previous }
     end
 
     context "with b" do
-      it { given_command("b").should eql :previous }
+      it { expect(given_command("b")).to eql :previous }
     end
 
     context "with start" do
-      it { given_command("start").should eql :start }
+      it { expect(given_command("start")).to eql :start }
     end
 
     context "with s" do
-      it { given_command("s").should eql :start }
+      it { expect(given_command("s")).to eql :start }
     end
 
     context "with end" do
-      it { given_command("end").should eql :end }
+      it { expect(given_command("end")).to eql :end }
     end
 
     context "with e" do
-      it { given_command("e").should eql :end }
+      it { expect(given_command("e")).to eql :end }
     end
 
     context "with list" do
-      it { given_command("list").should eql :list }
+      it { expect(given_command("list")).to eql :list }
     end
 
     context "with l" do
-      it { given_command("l").should eql :list }
+      it { expect(given_command("l")).to eql :list }
     end
 
     context "with any number" do
-      it { given_command("6").should eql :commit}
+      it { expect(given_command("6")).to eql :commit}
     end
 
     context "with h" do
-      it { given_command("h").should eql :help}
+      it { expect(given_command("h")).to eql :help}
     end
 
     context "with help" do
-      it { given_command("help").should eql :help}
+      it { expect(given_command("help")).to eql :help}
     end
 
     context "with exit" do
