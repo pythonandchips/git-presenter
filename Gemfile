@@ -3,7 +3,7 @@ source "http://rubygems.org"
 # Example:
 #   gem "activesupport", ">= 2.3.5"
 #
-gem "git", "1.8.1"
+gem "git", "1.13.0"
 gem 'launchy', "2.5.0"
 
 # Add dependencies to develop your gem here.
