@@ -63,7 +63,7 @@ GEM
     psych (2.2.4-java)
       jar-dependencies (>= 0.1.7)
     public_suffix (4.0.6)
-    rack (2.2.3)
+    rack (2.2.6.3)
     rake (13.0.3)
     rchardet (1.8.0)
     rdoc (6.3.0)
